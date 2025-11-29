@@ -20,7 +20,7 @@ public class CustomerService {
 
 
         Customer customer = new Customer(
-                "C002",
+                "C003",
                 customerDTO.getName(),
                 customerDTO.getAddress(),
                 customerDTO.getPhoneNo(),
@@ -31,8 +31,14 @@ public class CustomerService {
     }
 
     public CustomerDTO searchCustomer(String id) {
-        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
-        return new CustomerDTO(customer.getName(),customer.getAddress(),customer.getPhoneNo(),customer.getPostalCode());
+
+        Customer customer = customerRepository.findById(id).orElse(null);
+        return new CustomerDTO(
+                customer.getName(),
+                customer.getAddress(),
+                customer.getPhoneNo(),
+                customer.getPostalCode()
+        );
     }
 
     public List<CustomerDTO> getAll() {
@@ -54,5 +60,22 @@ public class CustomerService {
     public String deleteCustomer(String id) {
         customerRepository.deleteById(id);
         return "Delete Success";
+    }
+
+    public String updateCustomer(CustomerDTO customerDTO, String id) {
+        List<Customer> customers = customerRepository.findAll();
+        for(Customer c1 : customers){
+            if(c1.getId().equals(id)){
+                customerRepository.save(new Customer(
+                        id,
+                        customerDTO.getName(),
+                        customerDTO.getAddress(),
+                        customerDTO.getPhoneNo(),
+                        customerDTO.getPostalCode()
+                ));
+                return "Customer Update successful";
+            }
+        }
+        return "Customer update Unsuccessful";
     }
 }
