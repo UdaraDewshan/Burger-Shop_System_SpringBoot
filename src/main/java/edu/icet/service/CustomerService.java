@@ -23,4 +23,11 @@ public class CustomerService {
         customerRepository.save(customer);
         return "Added Success";
     }
+
+    public CustomerDTO searchCustomer(String id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        return new CustomerDTO(customer.getName(),customer.getAddress(),customer.getPhoneNo(),customer.getPostalCode());
+    }
+
+
 }

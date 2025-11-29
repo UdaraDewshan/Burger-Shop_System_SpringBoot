@@ -17,4 +17,9 @@ public class CustomerController {
         return customerService.addCustomer(customerDTO);
     }
 
+    @GetMapping("/search/{id}")
+    public CustomerDTO searchCustomer(@PathVariable("id") String id){
+        return customerService.searchCustomer(id);
+    }
+
 }
