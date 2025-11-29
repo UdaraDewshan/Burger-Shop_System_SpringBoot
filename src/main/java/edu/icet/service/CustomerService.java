@@ -33,12 +33,18 @@ public class CustomerService {
     public CustomerDTO searchCustomer(String id) {
 
         Customer customer = customerRepository.findById(id).orElse(null);
-        return new CustomerDTO(
-                customer.getName(),
-                customer.getAddress(),
-                customer.getPhoneNo(),
-                customer.getPostalCode()
-        );
+        if (customer!=null){
+            return new CustomerDTO(
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getPhoneNo(),
+                    customer.getPostalCode()
+            );
+        }else{
+            CustomerDTO customerDTO = new CustomerDTO();
+            customerDTO.setName("No Data");
+            return customerDTO;
+        }
     }
 
     public List<CustomerDTO> getAll() {
