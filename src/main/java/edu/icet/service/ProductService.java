@@ -34,5 +34,20 @@ public class ProductService {
         }
     }
 
-
+    public ProductDTO searchProduct(String id) {
+         Product product = productrepository.findById(id).orElse(null);
+         if (product!=null){
+             return new ProductDTO(
+                     product.getId(),
+                     product.getName(),
+                     product.getPrice(),
+                     product.getQuantity(),
+                     product.getIsAvailable()
+             );
+         }else {
+             ProductDTO productDTO = new ProductDTO();
+             productDTO.setName(null);
+             return productDTO;
+         }
+    }
 }
