@@ -17,8 +17,6 @@ public class CustomerService {
 
     public String addCustomer(CustomerDTO customerDTO) {
 
-
-
         Customer customer = new Customer(
                 "C003",
                 customerDTO.getName(),
@@ -84,4 +82,5 @@ public class CustomerService {
         }
         return "Customer update Unsuccessful";
     }
+
 }
