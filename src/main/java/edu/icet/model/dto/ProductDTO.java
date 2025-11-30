@@ -7,9 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ProductDTO {
+public class ProductDTO{
     private String id;
     private String name;
     private double price;
     private int quantity;
+    private Boolean isAvailable;
 }
