@@ -6,6 +6,9 @@ import edu.icet.repository.Productrepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -49,5 +52,22 @@ public class ProductService {
              productDTO.setName(null);
              return productDTO;
          }
+    }
+
+    public List<ProductDTO> getAll() {
+        List<Product> products = productrepository.findAll();
+        ArrayList<ProductDTO> productDTOS = new ArrayList<>();
+
+        for (Product p1 : products){
+            ProductDTO productDTO = new ProductDTO(
+                    p1.getId(),
+                    p1.getName(),
+                    p1.getPrice(),
+                    p1.getQuantity(),
+                    p1.getIsAvailable()
+            );
+            productDTOS.add(productDTO);
+        }
+        return productDTOS;
     }
 }
