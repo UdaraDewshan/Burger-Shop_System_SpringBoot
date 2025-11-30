@@ -70,4 +70,21 @@ public class ProductService {
         }
         return productDTOS;
     }
+
+    public String updateProduct(ProductDTO productDTO, String id) {
+        List<Product> products = productrepository.findAll();
+        for(Product p1: products){
+            if(p1.getId().equals(id)){
+                productrepository.save(new Product(
+                        id,
+                        productDTO.getName(),
+                        productDTO.getPrice(),
+                        productDTO.getQuantity(),
+                        productDTO.getIsAvailable()
+                ));
+                return "Product Update Success";
+            }
+        }
+        return "Product Update UnSuccess";
+    }
 }

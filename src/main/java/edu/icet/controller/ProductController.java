@@ -33,4 +33,10 @@ public class ProductController {
     public List<ProductDTO> getAll(){
         return productService.getAll();
     }
+
+    @PostMapping("/update/{id}")
+    public String updateProduct(@RequestBody ProductDTO productDTO,@PathVariable("id")String id){
+        return productService.updateProduct(productDTO,id);
+    }
+
 }
