@@ -25,5 +25,14 @@ public class ProductService {
         return "Added Success";
     }
 
+    public String deleteProduct(String id) {
+        if(productrepository.existsById(id)){
+            productrepository.deleteById(id);
+            return "Delete Success";
+        }else {
+            return "Product Not Found";
+        }
+    }
+
 
 }
