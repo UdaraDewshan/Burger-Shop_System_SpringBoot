@@ -9,5 +9,8 @@ import lombok.*;
 @ToString
 public class OrderDTO {
     private String id;
+    private String orderDetailId;
     private String customerId;
+    private String productId;
+    private String qty;
 }

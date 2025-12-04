@@ -8,11 +8,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Order {
+public class OrderDetails {
+
     @Id
     private String id;
-    private String orderDetailId;
-    private String customerId;
+    private String orderId;
     private String productId;
     private String qty;
 }
