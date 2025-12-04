@@ -1,5 +1,6 @@
 package edu.icet.model.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
 
@@ -8,11 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
 public class OrderDetails {
 
     @Id
-    private String id;
+    private String orderDetailId;
     private String orderId;
     private String productId;
     private String qty;
+
 }

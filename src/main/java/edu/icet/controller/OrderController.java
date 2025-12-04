@@ -1,12 +1,19 @@
 package edu.icet.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import edu.icet.model.dto.OrderDTO;
+import edu.icet.service.OrderServise;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("/order")
+@RequiredArgsConstructor
 public class OrderController {
-    public String testMethod(){
-        return "test method";
+
+    private final OrderServise orderServise;
+
+    @PostMapping("/add")
+    public String addOrder(@PathVariable OrderDTO orderDTO){
+        return orderServise.addOrder(orderDTO);
     }
 }
