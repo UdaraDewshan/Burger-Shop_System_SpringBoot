@@ -17,8 +17,20 @@ public class ProductService {
 
     public String addProduct(ProductDTO productDTO) {
 
+        List<Product> products =productrepository.findAll();
+        String genarateId = "P001";
+        int genIntId = 1;
+        for (Product product:products){
+            if (product.getProId().equals(genarateId)){
+                genIntId++;
+                genarateId = String.format("P%03d",genIntId);
+            }else{
+                break;
+            }
+        }
+
         Product product = new Product(
-                productDTO.getId(),
+                genarateId,
                 productDTO.getName(),
                 productDTO.getPrice(),
                 productDTO.getQuantity(),
@@ -41,7 +53,7 @@ public class ProductService {
          Product product = productrepository.findById(id).orElse(null);
          if (product!=null){
              return new ProductDTO(
-                     product.getId(),
+                     product.getProId(),
                      product.getName(),
                      product.getPrice(),
                      product.getQuantity(),
@@ -60,7 +72,7 @@ public class ProductService {
 
         for (Product p1 : products){
             ProductDTO productDTO = new ProductDTO(
-                    p1.getId(),
+                    p1.getProId(),
                     p1.getName(),
                     p1.getPrice(),
                     p1.getQuantity(),
@@ -74,7 +86,7 @@ public class ProductService {
     public String updateProduct(ProductDTO productDTO, String id) {
         List<Product> products = productrepository.findAll();
         for(Product p1: products){
-            if(p1.getId().equals(id)){
+            if(p1.getProId().equals(id)){
                 productrepository.save(new Product(
                         id,
                         productDTO.getName(),
