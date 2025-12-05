@@ -16,9 +16,20 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     public String addCustomer(CustomerDTO customerDTO) {
+        List<Customer> customers = customerRepository.findAll();
+        String genarateId = "C001";
+        int genIntId = 1;
+        for (Customer customer : customers){
+            if (customer.getCusId().equals(genarateId)){
+                genIntId++;
+                genarateId=String.format("C%03d",genIntId);
+            }else {
+                break;
+            }
+        }
 
         Customer customer = new Customer(
-                "C003",
+                genarateId,
                 customerDTO.getName(),
                 customerDTO.getAddress(),
                 customerDTO.getPhoneNo(),
@@ -69,7 +80,7 @@ public class CustomerService {
     public String updateCustomer(CustomerDTO customerDTO, String id) {
         List<Customer> customers = customerRepository.findAll();
         for(Customer c1 : customers){
-            if(c1.getId().equals(id)){
+            if(c1.getCusId().equals(id)){
                 customerRepository.save(new Customer(
                         id,
                         customerDTO.getName(),
