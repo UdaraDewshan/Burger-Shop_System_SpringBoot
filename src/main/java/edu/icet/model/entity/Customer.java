@@ -14,7 +14,7 @@ import lombok.*;
 public class Customer {
 
     @Id
-    private String id;
+    private String cusId;
     private String name;
     private String address;
     private String phoneNo;

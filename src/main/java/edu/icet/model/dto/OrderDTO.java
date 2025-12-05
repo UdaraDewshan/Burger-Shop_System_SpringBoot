@@ -3,6 +3,7 @@ package edu.icet.model.dto;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,10 +12,10 @@ import java.time.LocalDate;
 @ToString
 public class OrderDTO {
     private String orderId;
-    private String orderDetailId;
+    private String orderDetailsId;
     private String customerId;
-    private String productId;
-    private String qty;
     private LocalDate localDate;
     private double totalPrice;
+    private List<OrderProductDTO> orderProductsDTOS;
+
 }

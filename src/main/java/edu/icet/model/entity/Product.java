@@ -13,7 +13,7 @@ import lombok.*;
 @Entity
 public class Product {
     @Id
-    private String id;
+    private String proId;
     private String name;
     private double price;
     private int quantity;
