@@ -22,4 +22,5 @@ public class OrderDetails {
     @JoinColumn(name = "productId")
     private Product productId;
     private int qty;
+    private double price;
 }

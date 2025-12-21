@@ -16,6 +16,9 @@ public class OrderDTO {
     private String customerId;
     private LocalDate localDate;
     private double totalPrice;
+
+    private double price;
+
     private List<OrderProductDTO> orderProductsDTOS;
 
 }

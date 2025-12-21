@@ -52,7 +52,8 @@ public class OrderService {
                         genOrderDetailId(),
                         orderRepository.findById(genOrderId).orElse(null),
                         product,
-                        orderProductsDTOTemp.getQty()
+                        orderProductsDTOTemp.getQty(),
+                        orderDTO.getPrice()
                 ));
                 product.setQuantity(product.getQuantity() - orderProductsDTOTemp.getQty());
                 productrepository.save(product);
@@ -94,4 +95,24 @@ public class OrderService {
         }
         return genaratedId2;
     }
+
+
+    public String deleteOrder(String id) {
+        Orders orders = orderRepository.findById(id).orElse(null);
+        if (orders != null){
+            List<OrderDetails> orderDetails = orderDetailRepository.findAllByOrdersId_OrderId(id);
+            for (OrderDetails orderDetail : orderDetails){
+                Product product = productrepository.findById(orderDetail.getProductId().getProId()).orElse(null);
+                if (product == null) {
+                    throw new IllegalArgumentException("Something went Wrong Try again..!");
+                }
+                product.setQuantity(product.getQuantity()+orderDetail.getQty());
+                productrepository.save(product);
+            }
+            orderRepository.deleteById(id);
+            return "Order Deleted Successfully..!";
+        }
+        return "Order Doesn't Exist..!";
+    }
+
 }
